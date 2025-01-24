@@ -13,13 +13,11 @@ function Carousel({ existingCards }) {
   // New state for implementing shuffling
   const [cards, setCards] = useState(existingCards);
 
-  // Initialize cards with original index
+  // Syncs up the state value of cards to the data of existing cards
+  // second argument is the dependecy array. This tells react when to run the function
+  // in this case, the effect will run whenever any variable in the array changes
   useEffect(() => {
-    const cardsWithIndex = existingCards.map((card, index) => ({
-      ...card,
-      originalIndex: index,
-    }));
-    setCards(cardsWithIndex);
+    setCards(existingCards);
   }, [existingCards]);
 
   // 1. Display the first three images in the array by default
