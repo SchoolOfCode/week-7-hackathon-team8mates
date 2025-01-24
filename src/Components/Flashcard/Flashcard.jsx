@@ -4,27 +4,31 @@ import { useState } from "react";
 import { motion } from "motion/react";
 
 function Flashcard({ question, answer, cardIndex }) {
-  // Initialise state as false, as cards will render question pre flip
   const [flipped, setFlipped] = useState(false);
 
-  // Function that "toggles" between flipped or not flipped
   function handleFlip() {
-    // Sets flipped to true upon first click
     setFlipped(!flipped);
   }
-  // Runs the handleFlip function when clicked
+
   return (
     <motion.div
       initial={{ scale: 1 }}
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.1 }}
-      className={styles.card}
+      className={`${styles.card} ${flipped ? styles.flipped : ""}`}
       onClick={handleFlip}
     >
-      <p>{cardIndex}</p>
-      <p className={styles.emoji}>{flipped ? "🤓" : "🤔"}</p>
-      <div>{flipped ? answer : question}</div>
-    </motion.div> // Ternary operator that renders either question or answer depending on state of flipped
+      <div className={styles.front}>
+        <p>{cardIndex}</p>
+        <p className={styles.emoji}>🤔</p>
+        <div>{question}</div>
+      </div>
+      <div className={styles.back}>
+        <p>{cardIndex}</p>
+        <p className={styles.emoji}>🤓</p>
+        <div>{answer}</div>
+      </div>
+    </motion.div>
   );
 }
 
