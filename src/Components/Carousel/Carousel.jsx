@@ -3,13 +3,22 @@
 // The component should be able to take in an array of images and display them in a carousel format.
 // https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders and copilot
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Flashcard from "../Flashcard/Flashcard";
 import styles from "./Carousel.module.css";
 
 // The component should have the following features:
 function Carousel({ existingCards }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // New state for implementing shuffling
+  const [cards, setCards] = useState(existingCards);
+
+  // Syncs up the state value of cards to the data of existing cards
+  // second argument is the dependecy array. This tells react when to run the function
+  // in this case, the effect will run whenever any variable in the array changes
+  useEffect(() => {
+    setCards(existingCards);
+  }, [existingCards]);
 
   // 1. Display the first three images in the array by default
   // 2. Display the next three images when the right arrow is clicked
@@ -23,12 +32,12 @@ function Carousel({ existingCards }) {
     );
   };
 
-  const displayedCards = existingCards.slice(currentIndex, currentIndex + 3);
+  const displayedCards = cards.slice(currentIndex, currentIndex + 3);
 
   // LOGIC FOR SHUFFLING (fisher yates algorithm. Used in 3rd week hackathon)
   // incomplete. come back to tomorrow
-  function shuffleArray(array) {
-    let shuffledArray = array.slice(); // create a copy
+  function shuffleArray() {
+    let shuffledArray = [...cards]; // create a copy
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledArray[i], shuffledArray[j]] = [
@@ -36,7 +45,8 @@ function Carousel({ existingCards }) {
         shuffledArray[i],
       ];
     }
-    return shuffledArray;
+    setCards(shuffledArray);
+    setCurrentIndex(0);
   }
 
   function handleDelete(e, {cardIndex}) {
@@ -48,6 +58,9 @@ function Carousel({ existingCards }) {
   return (
     <div>
       <h1>Number of flashcards: {existingCards.length}</h1>
+      <button className={styles.shuffle} onClick={shuffleArray}>
+        Shuffle
+      </button>
       <div className={styles.carousel}>
         <button className={styles.arrowLeft} onClick={handlePrev}>
           {"<"}

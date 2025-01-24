@@ -2,15 +2,18 @@ import styles from "./Flashcard.module.css";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+
 function Flashcard({ question, answer, cardIndex, onDelete }) {
+
   const [flipped, setFlipped] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({ question, answer });
 
-  // Toggles the flipped state
+
   function handleFlip() {
     setFlipped(!flipped);
   }
+
 
   // Toggles edit mode
   function handleEdit() {
@@ -22,6 +25,7 @@ function Flashcard({ question, answer, cardIndex, onDelete }) {
     e.preventDefault();
     setEditMode(false); // Exit edit mode after saving
   }
+
 
 
   return (
@@ -85,6 +89,19 @@ function Flashcard({ question, answer, cardIndex, onDelete }) {
           <div>{flipped ? formData.answer : formData.question}</div>
         </>
       )}
+      className={`${styles.card} ${flipped ? styles.flipped : ""}`}
+      onClick={handleFlip}
+    >
+      <div className={styles.front}>
+        <p>{cardIndex}</p>
+        <p className={styles.emoji}>🤔</p>
+        <div>{question}</div>
+      </div>
+      <div className={styles.back}>
+        <p>{cardIndex}</p>
+        <p className={styles.emoji}>🤓</p>
+        <div>{answer}</div>
+      </div>
     </motion.div>
   );
 }
