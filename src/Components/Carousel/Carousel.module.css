@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
   width: 100%;
   margin: auto;
 }
@@ -23,4 +22,24 @@
 
 .images > div {
   flex: 1;
+}
+
+.shuffle {
+  background-color: #2e6fd1;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.shuffle:hover {
+  background-color: #04357e;
+}
+
+.shuffle:active {
+  background-color: #022a5e;
 }
