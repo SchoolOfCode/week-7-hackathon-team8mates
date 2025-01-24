@@ -11,6 +11,9 @@ import styles from "./Carousel.module.css";
 function Carousel({ existingCards }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // New state for implementing shuffling
+  const [cards, setCards] = useState(existingCards);
+
   // 1. Display the first three images in the array by default
   // 2. Display the next three images when the right arrow is clicked
   const handleNext = () => {
@@ -23,12 +26,12 @@ function Carousel({ existingCards }) {
     );
   };
 
-  const displayedCards = existingCards.slice(currentIndex, currentIndex + 3);
+  const displayedCards = cards.slice(currentIndex, currentIndex + 3);
 
   // LOGIC FOR SHUFFLING (fisher yates algorithm. Used in 3rd week hackathon)
   // incomplete. come back to tomorrow
-  function shuffleArray(array) {
-    let shuffledArray = array.slice(); // create a copy
+  function shuffleArray() {
+    let shuffledArray = [...cards]; // create a copy
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledArray[i], shuffledArray[j]] = [
@@ -36,12 +39,16 @@ function Carousel({ existingCards }) {
         shuffledArray[i],
       ];
     }
-    return shuffledArray;
+    setCards(shuffledArray);
+    setCurrentIndex(0);
   }
 
   return (
     <div>
       <h1>Number of flashcards: {existingCards.length}</h1>
+      <button className={styles.shuffle} onClick={shuffleArray}>
+        Shuffle
+      </button>
       <div className={styles.carousel}>
         <button className={styles.arrowLeft} onClick={handlePrev}>
           {"<"}
