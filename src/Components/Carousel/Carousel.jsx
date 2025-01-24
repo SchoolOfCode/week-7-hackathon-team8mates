@@ -3,16 +3,24 @@
 // The component should be able to take in an array of images and display them in a carousel format.
 // https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders and copilot
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Flashcard from "../Flashcard/Flashcard";
 import styles from "./Carousel.module.css";
 
 // The component should have the following features:
 function Carousel({ existingCards }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   // New state for implementing shuffling
   const [cards, setCards] = useState(existingCards);
+
+  // Initialize cards with original index
+  useEffect(() => {
+    const cardsWithIndex = existingCards.map((card, index) => ({
+      ...card,
+      originalIndex: index,
+    }));
+    setCards(cardsWithIndex);
+  }, [existingCards]);
 
   // 1. Display the first three images in the array by default
   // 2. Display the next three images when the right arrow is clicked
