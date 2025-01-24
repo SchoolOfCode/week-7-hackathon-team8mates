@@ -2,5 +2,6 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 10fr));
   gap: 20px;
+  border-color: rgb(17, 16, 16);
 }
 
