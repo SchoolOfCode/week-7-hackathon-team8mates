@@ -52,7 +52,7 @@ Filter Feature: Implement filters to sort flashcards by tags, categories, or dif
 
 Comprehensive Testing: Add unit and integration tests for improved app reliability.
 
-#📬 Contributing
+# 📬 Contributing
 
 Contributions are welcome! Feel free to fork the repo and submit a pull request with your enhancements.
 
