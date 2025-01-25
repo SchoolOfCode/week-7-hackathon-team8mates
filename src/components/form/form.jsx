@@ -46,7 +46,7 @@ function Form({ cards, setCards }) {
           type="submit"
           className={styles.button}
         >
-          Add flashcard
+          Add
         </motion.button>
       </div>
     </form>

@@ -1,18 +1,17 @@
 .button {
-  background-color: #0833f1;
+  background-color: #21106b;
   border: none;
   color: white;
-  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 20px;
+  margin: 30px;
   cursor: pointer;
 }
 
 .label {
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 20px;
   margin: 20px;
   flex-direction: row;
@@ -21,13 +20,19 @@
 .h3 {
   color: white;
   font-size: 30px;
+  margin: 0px;
 }
 
 .input {
+  background-color: black;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
   border: none;
+  color: antiquewhite;
+  width: 300px;
+  height: 40px;
+  font-size: 16px;
 }
 
 .form {
@@ -35,7 +40,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
 }
 
 .field {

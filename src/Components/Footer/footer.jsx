@@ -4,7 +4,7 @@ function Footer() {
   console.log("I am rendering");
   return (
     <div className={styles.footer}>
-      <h2>Copyright Team 8 Mates</h2>
+      <h2>Copyright © 2025 Team 8 Mates</h2>
     </div>
   );
 }

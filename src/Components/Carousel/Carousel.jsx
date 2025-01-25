@@ -7,35 +7,38 @@ import { useState, useEffect } from "react";
 import Flashcard from "../Flashcard/Flashcard";
 import styles from "./Carousel.module.css";
 
-// The component should have the following features:
 function Carousel({ existingCards }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // New state for implementing shuffling
-  const [cards, setCards] = useState(existingCards);
+  const [cards, setCards] = useState([]);
 
-  // Syncs up the state value of cards to the data of existing cards
-  // second argument is the dependecy array. This tells react when to run the function
-  // in this case, the effect will run whenever any variable in the array changes
+  // Initialize cards with a unique ID
   useEffect(() => {
-    setCards(existingCards);
+    const cardsWithId = existingCards.map((card, index) => ({
+      ...card,
+      id: index + 1, // Assign a static ID starting at 1
+    }));
+    setCards(cardsWithId);
   }, [existingCards]);
 
-  // 1. Display the first three images in the array by default
-  // 2. Display the next three images when the right arrow is clicked
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 3) % existingCards.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 3) % cards.length);
   };
-  // 3. Display the previous three images when the left arrow is clicked
+
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex - 3 < 0 ? existingCards.length - 3 : prevIndex - 3
+      prevIndex - 3 < 0 ? cards.length - 3 : prevIndex - 3
     );
+  };
+
+
+  const handleDelete = (idToDelete) => {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== idToDelete));
+    console.log("Deleted card with ID:", idToDelete);
   };
 
   const displayedCards = cards.slice(currentIndex, currentIndex + 3);
 
-  // LOGIC FOR SHUFFLING (fisher yates algorithm. Used in 3rd week hackathon)
-  // incomplete. come back to tomorrow
+
   function shuffleArray() {
     let shuffledArray = [...cards]; // create a copy
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -51,21 +54,21 @@ function Carousel({ existingCards }) {
 
   return (
     <div>
-      <h1>Number of flashcards: {existingCards.length}</h1>
-      <button className={styles.shuffle} onClick={shuffleArray}>
-        Shuffle
-      </button>
+
+      <h1 className={styles.h1}>Number of flashcards: {cards.length}</h1>
+
       <div className={styles.carousel}>
         <button className={styles.arrowLeft} onClick={handlePrev}>
           {"<"}
         </button>
         <div className={styles.images}>
-          {displayedCards.map((card, index) => (
+          {displayedCards.map((card) => (
             <Flashcard
-              key={currentIndex + index}
-              cardIndex={currentIndex + index + 1}
+              key={card.id} // Use the unique ID as the key
+             // cardIndex={card.id} // Pass the static ID as the index
               question={card.question}
               answer={card.answer}
+              onDelete={() => handleDelete(card.id)} // Delete based on ID
             />
           ))}
         </div>
@@ -73,6 +76,9 @@ function Carousel({ existingCards }) {
           {">"}
         </button>
       </div>
+      <button className={styles.shuffle} onClick={shuffleArray}>
+        Shuffle
+      </button>
     </div>
   );
 }

@@ -25,21 +25,21 @@
 }
 
 .shuffle {
-  background-color: #2e6fd1;
+  background-color: #21106b;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+  font-size: 1.5em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  margin-left: 45%;
+  padding:
 }
 
-.shuffle:hover {
-  background-color: #04357e;
+.h1 {
+  color: rgb(60, 60, 61);
+  font-size: 2rem;
+  margin: 0;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-.shuffle:active {
-  background-color: #022a5e;
-}

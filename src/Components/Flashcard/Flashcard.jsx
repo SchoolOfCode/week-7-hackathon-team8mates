@@ -1,34 +1,103 @@
-/* eslint-disable react/prop-types */
 import styles from "./Flashcard.module.css";
 import { useState } from "react";
-import { motion } from "motion/react";
+import ReactCardFlip from "react-card-flip";
 
-function Flashcard({ question, answer, cardIndex }) {
-  const [flipped, setFlipped] = useState(false);
+function Flashcard({ question, answer, cardIndex, onDelete }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({ question, answer });
 
+  // Toggle the flipped state
   function handleFlip() {
-    setFlipped(!flipped);
+    setIsFlipped(!isFlipped);
+  }
+
+  // Toggle edit mode
+  function handleEdit() {
+    setEditMode((prev) => !prev);
+  }
+
+  // Save updated question/answer
+  function handleSave(e) {
+    e.preventDefault();
+    setEditMode(false); // Exit edit mode after saving
   }
 
   return (
-    <motion.div
-      initial={{ scale: 1 }}
-      whileTap={{ scale: 0.95 }}
-      whileHover={{ scale: 1.1 }}
-      className={`${styles.card} ${flipped ? styles.flipped : ""}`}
-      onClick={handleFlip}
+    <ReactCardFlip
+      isFlipped={isFlipped}
+      flipDirection="horizontal"
+      className={styles.card}
     >
-      <div className={styles.front}>
-        <p>{cardIndex}</p>
-        <p className={styles.emoji}>🤔</p>
-        <div>{question}</div>
+      {/* FRONT SIDE */}
+      <div
+        className={styles.front}
+        onClick={!editMode ? handleFlip : undefined} // Disable flipping in edit mode
+      >
+        {!editMode && (
+          <>
+            <div className={styles.buttonGroup}>
+              <button className={styles.editButton} onClick={handleEdit}>
+                ✏️
+              </button>
+              <button
+                className={styles.deleteButton}
+                onClick={() => onDelete(cardIndex)}
+              >
+                ❌
+              </button>
+            </div>
+            <p className={styles.emoji}>🤔</p>
+            <h1>{formData.question}</h1>
+          </>
+        )}
       </div>
-      <div className={styles.back}>
-        <p>{cardIndex}</p>
-        <p className={styles.emoji}>🤓</p>
-        <div>{answer}</div>
+
+      {/* BACK SIDE */}
+      <div
+        className={styles.back}
+        onClick={!editMode ? handleFlip : undefined} // Disable flipping in edit mode
+      >
+        {editMode ? (
+          <form onSubmit={handleSave}>
+            <div className={styles.formGroup}>
+            <button type="submit" className={styles.saveButton}>
+              ✔️ Save
+            </button>
+              <label>
+                Question:
+                <input
+                  type="text"
+                  className={styles.input}
+                  value={formData.question}
+                  onChange={(e) =>
+                    setFormData({ ...formData, question: e.target.value })
+                  }
+                />
+              </label>
+            </div>
+            <div className={styles.formGroup}>
+              <label>
+                Answer:
+                <input
+                  type="text"
+                  className={styles.input}
+                  value={formData.answer}
+                  onChange={(e) =>
+                    setFormData({ ...formData, answer: e.target.value })
+                  }
+                />
+              </label>
+            </div>
+          </form>
+        ) : (
+          <>
+            <p className={styles.emoji}>🤓</p>
+            <h1>{formData.answer}</h1>
+          </>
+        )}
       </div>
-    </motion.div>
+    </ReactCardFlip>
   );
 }
 

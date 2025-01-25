@@ -23,9 +23,9 @@ function App() {
   return (
     <div>
       <Header />
+      <Form cards={cards} setCards={setCards} />
       <Carousel existingCards={cards} />
       {/* <Flashcards existingCards={cards} /> */}
-      <Form cards={cards} setCards={setCards} />
       <Footer />
     </div>
   );
