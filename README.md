@@ -36,18 +36,26 @@ npm run dev
 
 # 🗓️ Hackathon Highlights
 Two-Day Sprint: We created this app from scratch over 2 days but less than 24 hours in all.
+
 Teamwork: Collaborated effectively with a team, using Kanban boards for task management.
+
 Overcoming Challenges: Tackled issues like merge conflicts and learned strategies for smoother collaboration.
+
 Learning Outcomes: Improved understanding of full-stack development and app design.
 
 # 🛠️ Future Improvements
 Database Integration: Connect to a database like MongoDB to store flashcards and track user progress.
+
 Easy and Hard Modes: Add difficulty levels to customize the review experience.
+
 Filter Feature: Implement filters to sort flashcards by tags, categories, or difficulty.
+
 Comprehensive Testing: Add unit and integration tests for improved app reliability.
 
-📬 Contributing
+# 📬 Contributing
+
 Contributions are welcome! Feel free to fork the repo and submit a pull request with your enhancements.
 
-🏆 Acknowledgments
+# 🏆 Acknowledgments
+
 Thanks to everyone who contributed ideas, code, and feedback during this hackathon. A special shoutout to our mentors and organizers for their guidance!

@@ -1,3 +1,8 @@
+/* eslint-disable react/prop-types */
+// Aim is to build a carousel component that can be used to display images in a carousel format.
+// The component should be able to take in an array of images and display them in a carousel format.
+// https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders and copilot
+
 import { useState, useEffect } from "react";
 import Flashcard from "../Flashcard/Flashcard";
 import styles from "./Carousel.module.css";
@@ -25,12 +30,14 @@ function Carousel({ existingCards }) {
     );
   };
 
+
   const handleDelete = (idToDelete) => {
     setCards((prevCards) => prevCards.filter((card) => card.id !== idToDelete));
     console.log("Deleted card with ID:", idToDelete);
   };
 
   const displayedCards = cards.slice(currentIndex, currentIndex + 3);
+
 
   function shuffleArray() {
     let shuffledArray = [...cards]; // create a copy
@@ -47,7 +54,9 @@ function Carousel({ existingCards }) {
 
   return (
     <div>
+
       <h1 className={styles.h1}>Number of flashcards: {cards.length}</h1>
+
       <div className={styles.carousel}>
         <button className={styles.arrowLeft} onClick={handlePrev}>
           {"<"}
