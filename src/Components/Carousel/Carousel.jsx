@@ -51,7 +51,9 @@ function Carousel({ existingCards }) {
 
   return (
     <div>
-      <h1>Number of flashcards: {existingCards.length}</h1>
+      <h1 className="text-red-50">
+        Number of flashcards: {existingCards.length}
+      </h1>
       <button className={styles.shuffle} onClick={shuffleArray}>
         Shuffle
       </button>

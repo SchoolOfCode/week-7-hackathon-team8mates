@@ -23,6 +23,7 @@ function App() {
   return (
     <div>
       <Header />
+      <p className="text-red-600 bg-red-600">dasdasd</p>
       <Carousel existingCards={cards} />
       {/* <Flashcards existingCards={cards} /> */}
       <Form cards={cards} setCards={setCards} />
